@@ -1,3 +1,4 @@
+
 package locadora.repository;
 
 import locadora.model.Aluguel;
@@ -5,27 +6,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AluguelRepository {
-
-    private List<Aluguel> alugueis = new ArrayList<>();
-    private long idCounter = 1;
-
-    public Aluguel save(Aluguel aluguel) {
-        aluguel.setId(idCounter);
-        idCounter++;
-        alugueis.add(aluguel);
-        return aluguel;
-    }
+    private final List<Aluguel> banco = new ArrayList<>();
 
     public Aluguel findById(long id) {
-        for (Aluguel aluguel : alugueis) {
-            if (aluguel.getId() == id) {
-                return aluguel;
-            }
+        for (Aluguel a : banco) {
+            if (a.getId() == id) return a;
         }
         return null;
     }
 
-    public List<Aluguel> findAll() {
-        return new ArrayList<>(alugueis);
+    public void salvar(Aluguel aluguel) {
+        if (findById(aluguel.getId()) == null) {
+            banco.add(aluguel);
+        } else {
+            atualizar(aluguel);
+        }
+    }
+
+    public void atualizar(Aluguel aluguel) {
+        for (int i = 0; i < banco.size(); i++) {
+            if (banco.get(i).getId() == aluguel.getId()) {
+                banco.set(i, aluguel);
+                return;
+            }
+        }
+        banco.add(aluguel);
+    }
+
+    public List<Aluguel> listarTodos() {
+        return new ArrayList<>(banco);
     }
 }

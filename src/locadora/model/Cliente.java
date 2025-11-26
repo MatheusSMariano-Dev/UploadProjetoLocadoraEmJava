@@ -1,15 +1,19 @@
 package locadora.model;
 
+public class Cliente {
 
+    private String nome;
+    private long CPF;
+    private long id;
+    private String email;
+    private long telefone;
 
-
-public class Cliente   {
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        this.Nome = nome;
+        this.nome = nome;
     }
 
     public long getCPF() {
@@ -44,10 +48,15 @@ public class Cliente   {
         this.telefone = telefone;
     }
 
-    private String Nome;
-    private long CPF;
-    private long id;
-    private String email;
-    private long telefone;
+    @Override
+    public String toString() {
+        return "Cliente" +
+                "\nID: " + id +
+                "\nNome: " + nome +
+                "\nCPF: " + CPF +
+                "\nE-mail: " + email +
+                "\nTelefone: " + telefone +
+                "\n";
+    }
 
 }
